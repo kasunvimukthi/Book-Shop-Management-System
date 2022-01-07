@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="499" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="794d43dc-21bb-4c3c-8766-40e1b2016281">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="invo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     sales_details.`ID` AS sales_details_ID,
+     sales_details.`Invoice_Number` AS sales_details_Invoice_Number,
+     sales_details.`ISBN` AS sales_details_ISBN,
+     sales_details.`Book_Name` AS sales_details_Book_Name,
+     sales_details.`Author` AS sales_details_Author,
+     sales_details.`Price` AS sales_details_Price,
+     sales_details.`Quantity` AS sales_details_Quantity,
+     sales_details.`Cost` AS sales_details_Cost,
+     sales.`Invoice_Number` AS sales_Invoice_Number,
+     sales.`Date` AS sales_Date,
+     sales.`Total_Cost` AS sales_Total_Cost,
+     sales.`Payment` AS sales_Payment,
+     sales.`Balance` AS sales_Balance
+FROM
+     `sales_details` sales_details INNER JOIN `sales` sales ON sales_details.`Invoice_Number` = sales.`Invoice_Number`
+WHERE
+     sales.`Invoice_Number` = $P{invo}]]>
+	</queryString>
+	<field name="sales_details_ID" class="java.lang.Integer"/>
+	<field name="sales_details_Invoice_Number" class="java.lang.Integer"/>
+	<field name="sales_details_ISBN" class="java.lang.String"/>
+	<field name="sales_details_Book_Name" class="java.lang.String"/>
+	<field name="sales_details_Author" class="java.lang.String"/>
+	<field name="sales_details_Price" class="java.lang.Double"/>
+	<field name="sales_details_Quantity" class="java.lang.Integer"/>
+	<field name="sales_details_Cost" class="java.lang.Double"/>
+	<field name="sales_Invoice_Number" class="java.lang.Integer"/>
+	<field name="sales_Date" class="java.sql.Date"/>
+	<field name="sales_Total_Cost" class="java.lang.Double"/>
+	<field name="sales_Payment" class="java.lang.Double"/>
+	<field name="sales_Balance" class="java.lang.Double"/>
+	<group name="Sub Total">
+		<groupFooter>
+			<band height="76">
+				<textField>
+					<reportElement x="450" y="5" width="100" height="20" uuid="9d33813b-2e4b-4b55-8a03-dc5dbcc7dc1d"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sales_Total_Cost}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="450" y="26" width="100" height="20" uuid="7466d954-a104-41c1-8c6b-9f5a312ed9ba"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sales_Payment}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="450" y="51" width="100" height="20" uuid="82e34a7c-acd0-4088-bfe4-a445acc88ce2"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{sales_Balance}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="342" y="2" width="100" height="23" uuid="83f4a430-5b54-4c51-a083-22f41b6d67c5"/>
+					<text><![CDATA[Total Cost]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="342" y="25" width="100" height="23" uuid="5bc0e3f9-ad0c-4175-849d-3128411f0092"/>
+					<text><![CDATA[Payment]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="342" y="48" width="100" height="23" uuid="7d9d93d1-12b1-4931-a3b5-b30a9e02097f"/>
+					<text><![CDATA[Balance]]></text>
+				</staticText>
+				<line>
+					<reportElement x="455" y="48" width="100" height="1" uuid="1f6a4be2-cb47-439e-9d9c-28c00def8b69"/>
+				</line>
+				<line>
+					<reportElement x="455" y="71" width="100" height="1" uuid="c587bb3c-c6c7-4d24-b9d3-7ac1ae06ec61"/>
+					<graphicElement>
+						<pen lineStyle="Double"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="0" width="152" height="24" uuid="74258ef6-1945-4491-a9ef-cf997caf84bb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Cambria Math" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Book Shop]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="27" width="100" height="20" uuid="b2beeaef-212f-4f51-a47e-550359037a56"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sri Lanka]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="29" uuid="0f7d2752-0fdd-4b4b-8140-a3057b4f6fde"/>
+				<text><![CDATA[Invoice Number]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="c68e56b3-d3e6-4413-ba58-10a99c5b3b88"/>
+				<textFieldExpression><![CDATA[$F{sales_details_Invoice_Number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="100" height="20" uuid="95835ff2-f515-49b6-b2cd-e6e308fff823"/>
+				<textFieldExpression><![CDATA[$F{sales_Date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="23" uuid="7d60ea36-dd75-4c0e-9cc4-c388d8f76c02"/>
+				<text><![CDATA[ISBN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="0" width="100" height="23" uuid="853e8a0b-c2f1-4958-b47f-90aec182ba75"/>
+				<text><![CDATA[Book Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="0" width="100" height="23" uuid="cc80ac44-2352-45c0-a60e-b16d0908a233"/>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="0" width="100" height="23" uuid="37c8a1a9-8148-4f20-9b93-243ce5f71393"/>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="100" height="23" uuid="a87ca5b7-2332-4abb-a769-de18a214dd8a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cost]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="00f16126-fd97-4aac-98bd-42c0ae48b96d"/>
+				<textFieldExpression><![CDATA[$F{sales_details_ISBN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="0" width="100" height="20" uuid="24dc928e-868f-4761-9a4e-955e8cc689be"/>
+				<textFieldExpression><![CDATA[$F{sales_details_Book_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="0" width="100" height="20" uuid="4cb14705-5a35-49aa-83e6-c308676762cc"/>
+				<textFieldExpression><![CDATA[$F{sales_details_Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="0" width="100" height="20" uuid="210faab7-32f6-44e1-9bfd-05921b614069"/>
+				<textFieldExpression><![CDATA[$F{sales_details_Quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="100" height="20" uuid="51336e5d-ec50-4a1e-a414-d4bcf9bf0d1c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{sales_details_Cost}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="22" width="547" height="1" uuid="3354a0a1-0581-4702-9a9b-dbdacc09c0db"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
